@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -e
+set -exu
 
 PID1=$1
 if [ "$PID1" != "self" ] && ! echo $PID1 | grep -q -x '[0-9]*'
@@ -14,4 +14,4 @@ then
         PID2="$(docker container inspect $PID2 | jq '.[0].State.Pid')"
 fi
 
-addmount $PID1 $2 $PID2 $4
+/usr/local/bin/addmount $PID1 $2 $PID2 $4
